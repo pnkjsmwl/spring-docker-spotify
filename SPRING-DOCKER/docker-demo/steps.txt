@@ -1,0 +1,27 @@
+1. create project, add 'web' as dependency
+2. run project to see all works fine thru cmd (windows)
+
+mvnw.cmd package && java -jar target/docker-demo-0.0.1-SNAPSHOT.jar
+
+3. update pom to add 'com.spotify' which helps to build image for the container , https://spring.io/guides/gs/spring-boot-docker/
+4. add the Dockerfile
+
+For step 5 and 6 , make sure docker is running and also keep your crendentials in .m2/settings.xml file and add 
+<useMavenSettingsForAuth>true</useMavenSettingsForAuth> in <configuration>
+5. stop project and build image thru cmd
+
+mvnw.cmd install dockerfile:build
+
+6. to push this image to your private repo run below command
+
+mvnw.cmd dockerfile:push
+
+
+7. now login to docker.io and check the latest image
+
+8. run this image like below, we can run multiple instances, just change port number.
+
+docker run -p 8080:8080 -t pnkjsmwl/docker-demo
+docker run -p 8081:8080 -t pnkjsmwl/docker-demo
+docker run -p 8082:8080 -t pnkjsmwl/docker-demo
+docker run -p 8083:8080 -t pnkjsmwl/docker-demo
